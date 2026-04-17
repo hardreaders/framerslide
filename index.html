@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Я знаю що робити. Але чомусь не роблю.</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f8f6f2;--bg2:#f0ede8;--black:#0f0f0f;
+  --green:#3d8c5e;--gl:#edf5f0;--gm:#c8e6d5;
+  --muted:#888;--border:#e0ddd8;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--black);font-family:'Manrope',sans-serif;overflow-x:hidden}
+
+/* ── SCREEN 1 ── */
+.s1{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+}
+@media(max-width:768px){
+  .s1{grid-template-columns:1fr;min-height:auto}
+}
+
+.s1-left{
+  padding:clamp(60px,8vw,120px) clamp(32px,6vw,80px);
+  display:flex;flex-direction:column;justify-content:center;
+}
+
+.eyebrow{
+  font-size:11px;font-weight:700;
+  letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--green);margin-bottom:24px;
+  opacity:0;animation:fadeUp 0.5s ease 0.1s forwards;
+}
+
+.s1-title{
+  font-family:'Unbounded',sans-serif;
+  font-size:clamp(36px,5.5vw,72px);
+  font-weight:900;line-height:1.0;
+  letter-spacing:-0.03em;margin-bottom:24px;
+  opacity:0;animation:fadeUp 0.6s ease 0.2s forwards;
+}
+.s1-title .g{color:var(--green)}
+
+.s1-sub{
+  font-size:clamp(16px,1.6vw,20px);
+  font-weight:400;color:var(--muted);
+  max-width:480px;margin-bottom:40px;line-height:1.7;
+  opacity:0;animation:fadeUp 0.6s ease 0.35s forwards;
+}
+.s1-sub strong{color:var(--black);font-weight:600}
+
+.btn{
+  display:inline-flex;align-items:center;gap:12px;
+  background:var(--black);color:white;
+  font-family:'Unbounded',sans-serif;
+  font-size:clamp(12px,1.3vw,14px);
+  font-weight:700;letter-spacing:0.04em;
+  padding:clamp(16px,1.8vw,20px) clamp(24px,3vw,40px);
+  text-decoration:none;transition:all 0.25s;
+  align-self:flex-start;
+  opacity:0;animation:fadeUp 0.6s ease 0.5s forwards;
+}
+.btn:hover{background:var(--green);transform:translateY(-2px)}
+.btn-ico{
+  width:22px;height:22px;border-radius:50%;
+  background:var(--green);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;flex-shrink:0;
+  transition:background 0.25s,color 0.25s;
+}
+.btn:hover .btn-ico{background:white;color:var(--green)}
+
+.s1-right{
+  position:relative;height:100vh;overflow:hidden;
+}
+@media(max-width:768px){
+  .s1-right{height:70vw;min-height:300px}
+}
+.s1-photo{
+  width:100%;height:100%;
+  object-fit:cover;object-position:top center;
+  filter:grayscale(15%);
+  opacity:0;animation:fadeIn 0.8s ease 0.3s forwards;
+}
+.s1-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to right,var(--bg) 0%,transparent 30%);
+  pointer-events:none;
+}
+@media(max-width:768px){
+  .s1-overlay{background:linear-gradient(to bottom,transparent 60%,var(--bg) 100%)}
+}
+.s1-tag{
+  position:absolute;bottom:40px;right:40px;
+  background:white;border:1px solid var(--border);
+  padding:16px 20px;
+  opacity:0;animation:fadeUp 0.6s ease 0.7s forwards;
+}
+@media(max-width:768px){.s1-tag{bottom:16px;right:16px;padding:12px 16px}}
+.s1-tag-name{font-family:'Unbounded',sans-serif;font-size:16px;font-weight:900;margin-bottom:2px}
+.s1-tag-role{font-size:11px;color:var(--green);font-weight:600;letter-spacing:0.1em;text-transform:uppercase}
+
+/* ── DIVIDER ── */
+.divider{width:100%;height:1px;background:var(--border)}
+
+/* ── SCREEN 2 — BULLETS ── */
+.s2{
+  padding:clamp(80px,10vw,140px) clamp(24px,6vw,80px);
+  max-width:960px;margin:0 auto;
+  text-align:center;
+}
+
+.s2-label{
+  font-size:11px;font-weight:700;
+  letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--green);margin-bottom:20px;
+}
+
+.s2-title{
+  font-family:'Unbounded',sans-serif;
+  font-size:clamp(26px,3.5vw,48px);
+  font-weight:700;line-height:1.15;
+  letter-spacing:-0.02em;margin-bottom:48px;
+}
+
+.bullets{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2px;
+  margin-bottom:56px;
+  text-align:left;
+}
+@media(max-width:600px){
+  .bullets{grid-template-columns:1fr}
+}
+
+.bullet{
+  background:var(--bg2);border:1px solid var(--border);
+  padding:28px 28px 28px 24px;
+  display:flex;gap:20px;align-items:flex-start;
+  transition:background 0.2s,border-color 0.2s;
+}
+.bullet:hover{background:var(--gl);border-color:var(--gm)}
+
+.bullet-num{
+  font-family:'Unbounded',sans-serif;
+  font-size:clamp(28px,4vw,44px);
+  font-weight:900;color:var(--gm);
+  line-height:1;flex-shrink:0;
+  transition:color 0.2s;
+  min-width:clamp(36px,5vw,56px);
+}
+.bullet:hover .bullet-num{color:var(--green)}
+
+.bullet-body{}
+.bullet-title{
+  font-family:'Unbounded',sans-serif;
+  font-size:clamp(14px,1.6vw,18px);
+  font-weight:700;margin-bottom:8px;
+  line-height:1.2;
+}
+.bullet-desc{
+  font-size:clamp(13px,1.3vw,15px);
+  color:var(--muted);line-height:1.6;
+}
+
+/* BTN CENTERED */
+.btn-center{display:flex;justify-content:center}
+.btn-center .btn{opacity:1;animation:none;align-self:auto}
+
+/* ── SCREEN 3 — PROOF ── */
+.s3{
+  background:var(--bg2);border-top:1px solid var(--border);
+  padding:clamp(80px,10vw,140px) clamp(24px,6vw,80px);
+}
+.s3-inner{
+  max-width:960px;margin:0 auto;
+  text-align:center;
+}
+
+.s3-label{
+  font-size:11px;font-weight:700;
+  letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--green);margin-bottom:20px;
+}
+
+.s3-title{
+  font-family:'Unbounded',sans-serif;
+  font-size:clamp(26px,3.5vw,48px);
+  font-weight:700;line-height:1.15;
+  letter-spacing:-0.02em;margin-bottom:16px;
+}
+.s3-title .g{color:var(--green)}
+
+.s3-sub{
+  font-size:clamp(16px,1.7vw,20px);
+  color:var(--muted);max-width:560px;
+  margin:0 auto 48px;line-height:1.7;
+}
+.s3-sub strong{color:var(--black);font-weight:600}
+
+.stats{
+  display:flex;gap:2px;
+  margin:0 auto 48px;
+  max-width:680px;
+}
+.stat{
+  flex:1;background:var(--bg);
+  border:1px solid var(--border);
+  padding:clamp(16px,2vw,24px) 12px;
+  text-align:center;
+}
+.stat-n{
+  font-family:'Unbounded',sans-serif;
+  font-size:clamp(20px,2.8vw,32px);
+  font-weight:900;margin-bottom:4px;
+}
+.stat-l{font-size:clamp(10px,1.1vw,12px);color:var(--muted);line-height:1.3}
+
+/* ANIMATIONS */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes fadeIn{
+  from{opacity:0}to{opacity:1}
+}
+.reveal{
+  opacity:0;transform:translateY(24px);
+  transition:opacity 0.6s ease,transform 0.6s ease;
+}
+.reveal.on{opacity:1;transform:none}
+
+@media(max-width:600px){
+  .stats{flex-wrap:wrap}
+  .stat{flex:1 1 45%}
+  .btn{width:100%;justify-content:center;align-self:stretch}
+  .btn-center .btn{width:100%}
+}
+</style>
+</head>
+<body>
+
+<!-- SCREEN 1 -->
+<section class="s1">
+  <div class="s1-left">
+    <div class="eyebrow">Безкоштовне відео</div>
+    <h1 class="s1-title">
+      Ти знаєш<br>що робити.<br>
+      <span class="g">Але чомусь<br>не робиш.</span>
+    </h1>
+    <p class="s1-sub">
+      Я з'ясував чому це відбувається — і чому <strong>знання про проблему її не вирішує.</strong> Дивись безкоштовно.
+    </p>
+    <a href="https://t.me/structurenickbot" class="btn" target="_blank">
+      Дивитись відео
+      <span class="btn-ico">→</span>
+    </a>
+  </div>
+  <div class="s1-right">
+    <img class="s1-photo"
+      src="https://framerusercontent.com/images/OYSNfy1gnvRnslYmxBpimBlGT8.png"
+      alt="Нік"
+      onerror="this.parentElement.style.display='none'">
+    <div class="s1-overlay"></div>
+    <div class="s1-tag">
+      <div class="s1-tag-name">Нік</div>
+      <div class="s1-tag-role">Поведінковий аналітик</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SCREEN 2 — BULLETS -->
+<section class="s2">
+  <div class="s2-label reveal">Що всередині відео</div>
+  <h2 class="s2-title reveal">За 15 хвилин ти дізнаєшся</h2>
+
+  <div class="bullets reveal">
+    <div class="bullet">
+      <div class="bullet-num">01</div>
+      <div class="bullet-body">
+        <div class="bullet-title">Чому ти відкладаєш — і це не лінь</div>
+        <div class="bullet-desc">Справжня причина яку більшість людей не помічають у собі</div>
+      </div>
+    </div>
+    <div class="bullet">
+      <div class="bullet-num">02</div>
+      <div class="bullet-body">
+        <div class="bullet-title">Який механізм запускається в голові</div>
+        <div class="bullet-desc">Щоразу коли підходиш до задачі — ще до того як почав(ла)</div>
+      </div>
+    </div>
+    <div class="bullet">
+      <div class="bullet-num">03</div>
+      <div class="bullet-body">
+        <div class="bullet-title">Чому знати про проблему недостатньо</div>
+        <div class="bullet-desc">І чому ти повертаєшся в ту саму точку навіть коли все розумієш</div>
+      </div>
+    </div>
+    <div class="bullet">
+      <div class="bullet-num">04</div>
+      <div class="bullet-body">
+        <div class="bullet-title">Що зробити прямо зараз</div>
+        <div class="bullet-desc">Один практичний крок щоб зменшити опір і почати</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-center reveal">
+    <a href="https://t.me/structurenickbot" class="btn" target="_blank">
+      Дивитись відео
+      <span class="btn-ico">→</span>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SCREEN 3 — PROOF -->
+<section class="s3">
+  <div class="s3-inner">
+    <div class="s3-label reveal">25 діагностик за місяць</div>
+    <h2 class="s3-title reveal">
+      В кожній другій —<br>
+      <span class="g">одна і та сама картина.</span>
+    </h2>
+    <p class="s3-sub reveal">
+      Люди знають що треба зробити. Розуміють як.<br>
+      Але щось щоразу заважає почати.<br><br>
+      <strong>Я розібрав цей механізм.</strong> Дивись — це безкоштовно.
+    </p>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="stat-n">25</div><div class="stat-l">діагностик за місяць</div></div>
+      <div class="stat"><div class="stat-n">450+</div><div class="stat-l">людей через систему</div></div>
+      <div class="stat"><div class="stat-n">150+</div><div class="stat-l">живих відгуків</div></div>
+      <div class="stat"><div class="stat-n">6</div><div class="stat-l">років практики</div></div>
+    </div>
+
+    <div class="btn-center reveal">
+      <a href="https://t.me/structurenickbot" class="btn" target="_blank">
+        Дивитись відео
+        <span class="btn-ico">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+const els=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver(e=>{
+  e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('on');io.unobserve(en.target)}});
+},{threshold:0.12});
+els.forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
