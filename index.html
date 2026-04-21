@@ -247,6 +247,54 @@ body{background:var(--bg);color:var(--black);font-family:'Manrope',sans-serif;ov
   .btn{width:100%;justify-content:center;align-self:stretch}
   .btn-center .btn{width:100%}
 }
+
+/* ── ULTRAWIDE 3440×1440+ ── */
+@media(min-width:2560px){
+  .s1{
+    min-height:100vh;
+    grid-template-columns:1fr 1fr;
+  }
+  .s1-left{
+    padding:clamp(80px,6vw,160px) clamp(80px,7vw,160px);
+  }
+  .s1-right{
+    height:100vh;
+  }
+  .s1-title{
+    font-size:clamp(64px,4.5vw,100px);
+  }
+  .s1-sub{
+    font-size:clamp(18px,1.4vw,26px);
+    max-width:600px;
+  }
+  .s2,.s3-inner{
+    max-width:1400px;
+  }
+  .s2-title,.s3-title{
+    font-size:clamp(36px,3vw,64px);
+  }
+  .bullet-title{
+    font-size:clamp(16px,1.3vw,22px);
+  }
+  .bullet-desc{
+    font-size:clamp(14px,1.1vw,18px);
+  }
+  .stats{
+    max-width:960px;
+  }
+  .stat-n{
+    font-size:clamp(28px,2.4vw,48px);
+  }
+  .stat-l{
+    font-size:clamp(12px,0.9vw,16px);
+  }
+  .s1-tag{
+    bottom:60px;right:60px;
+    padding:24px 32px;
+  }
+  .s1-tag-name{font-size:22px}
+  .s1-tag-role{font-size:13px}
+}
 </style>
 </head>
 <body>
